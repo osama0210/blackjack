@@ -29,11 +29,14 @@ namespace blackjack
             set { cardValue = value; }
         }
 
-        public Card(Suits suit, FaceValues faceValue, int cardValue)
+        public Card(Suits suit, FaceValues faceValue)
         {
-            suit = Suit;
-            faceValue = FaceValue;
-            cardValue = CardValue;
+            this.suit = suit;
+            this.faceValue = faceValue;
+        }
+        public override string ToString()
+        {
+            return $"{FaceValue} of {Suit}";
         }
     }
 }
