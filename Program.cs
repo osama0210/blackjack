@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace blackjack
 {
     internal static class Program
@@ -14,6 +16,16 @@ namespace blackjack
             Application.Run(new Form1());
 
             Deck deck = new Deck();
+
+            Debug.WriteLine("DECK VOOR SHUFFLE:");
+            deck.PrintDeck();
+
+
+            deck.shuffleCards();
+
+            Debug.WriteLine("\nDECK NA SHUFFLE:");
+            deck.PrintDeck();
+
 
         }
     }
