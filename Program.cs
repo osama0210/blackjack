@@ -16,17 +16,19 @@ namespace blackjack
             Application.Run(new Form1());
 
             Deck deck = new Deck();
-
-            Debug.WriteLine("DECK VOOR SHUFFLE:");
-            deck.PrintDeck();
-
-
-            deck.shuffleCards();
-
-            Debug.WriteLine("\nDECK NA SHUFFLE:");
-            deck.PrintDeck();
+            Dealer dealer = new Dealer();
+            Player player = new Player();
 
 
+            Debug.WriteLine("Start van programma");
+
+            dealer.dealCards(deck, player);
+
+
+            foreach (Card card in dealer.DealerHand)
+            {
+                Debug.WriteLine("Dealer Card: " + card);
+            }
         }
     }
 }

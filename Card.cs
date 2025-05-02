@@ -11,6 +11,7 @@ namespace blackjack
         private Suits suit;
         private FaceValues faceValue;
         private int cardValue;
+        private bool isFaceUp = true;
         private Image image;
 
 
@@ -29,14 +30,24 @@ namespace blackjack
             set { cardValue = value; }
         }
 
-        public Card(Suits suit, FaceValues faceValue)
+        public bool IsFaceUp
+        {
+            get { return isFaceUp; }
+            set { isFaceUp = value; }
+        }
+
+        public Card(Suits suit, FaceValues faceValue, bool isFaceUp)
         {
             this.suit = suit;
             this.faceValue = faceValue;
+            this.isFaceUp = true;
         }
         public override string ToString()
         {
-            return $"{FaceValue} of {Suit}";
+            if (!isFaceUp)
+                return "[Hidden Card]";
+            else
+                return $"{faceValue} of {suit}";
         }
     }
 }

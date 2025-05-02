@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+﻿using System.Diagnostics;
 
 namespace blackjack
 {
@@ -13,30 +6,36 @@ namespace blackjack
     {
         private List<Card> cards = new List<Card>();
 
+        public List<Card> Cards
+        {
+            get { return cards; }
+            set { cards = value; }
+        }
+
 
         public Deck()
         {
-            foreach(Suits suit in Enum.GetValues(typeof(Suits)))
+            foreach (Suits suit in Enum.GetValues(typeof(Suits)))
             {
                 foreach (FaceValues faceValue in Enum.GetValues(typeof(FaceValues)))
                 {
-                    cards.Add(new Card(suit, faceValue));
-                }                               
+                    cards.Add(new Card(suit, faceValue, true));
+                }
             }
         }
 
         public void shuffleCards()
         {
             Random random = new Random();
-            for(int i = cards.Count -1; i > 0; i--)
+            for (int i = cards.Count - 1; i > 0; i--)
             {
-                int j = random.Next(i + 1);
+                int j = random.Next(i + 1); // Kies een willekeurige index tussen 0 en i
 
-                Card cardA = cards[i]; // Een kopie opslaan van elke iteratie
-                // Om de gekopieerde waarden (cardA en cardB) echt om te wisselen in de lijst,
-                // moeten we ze terugplaatsen op hun originele posities in de kaartenlijst (cards).
-                cards[i] = cards[j]; // Zet ver
-                cards[j] = cardA; // Zet cardA op de random plek die al gekozen is in de varaible randomIndex
+                Card cardA = cards[i]; // Sla de kaart op positie i tijdelijk op
+
+                // Wissel de kaarten op positie i en j
+                cards[i] = cards[j]; // Zet de kaart van positie j op positie i
+                cards[j] = cardA;    // Zet de oorspronkelijke kaart (van i) op positie j
 
 
                 /* 
@@ -52,14 +51,16 @@ namespace blackjack
             }
         }
 
-        public void dealCards()
+        public Card giveOneCard()
         {
-
+            Card pickOneCard = cards[0];
+            cards.RemoveAt(0);
+            return pickOneCard;
         }
 
         public void PrintDeck()
         {
-            foreach(Card card in cards)
+            foreach (Card card in cards)
             {
                 Debug.WriteLine(card);
             }
