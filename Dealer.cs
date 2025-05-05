@@ -10,7 +10,7 @@ namespace blackjack
 {
     class Dealer
     {
-             
+
         private List<Card> dealerHand = new List<Card>();
 
         public List<Card> DealerHand
@@ -20,14 +20,15 @@ namespace blackjack
         }
 
 
-        public void dealCards(Deck deck, Player player)
+        public void dealCards(Deck deck, List<Player> players)
         {
-            deck.shuffleCards();
             for (int i = 0; i < 2; i++)
             {
-                Card card1 = deck.giveOneCard();
-                player.addCard(card1);
-
+                foreach (Player playerGiveCard in players)
+                {
+                    Card card = deck.giveOneCard();
+                    playerGiveCard.addCard(card);
+                }
             }
             Card dealerCard1 = deck.giveOneCard();
             dealerHand.Add(dealerCard1);

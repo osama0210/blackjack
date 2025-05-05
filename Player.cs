@@ -10,6 +10,7 @@ namespace blackjack
     class Player
     {
         private List<Card> playerHand = new List<Card>();
+        private string name;
 
         public List<Card> PlayerHand
         {
@@ -17,10 +18,15 @@ namespace blackjack
             set { playerHand = value; }
         }
 
-        public void addCard(Card card)
+        public string Name
         {
-           playerHand.Add(card);
+            get { return name; }
+            set { name = value; }
         }
 
+        public void addCard(Card card)
+        {
+            playerHand.Add(card);
+        }
     }
 }

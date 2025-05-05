@@ -17,17 +17,45 @@ namespace blackjack
 
             Deck deck = new Deck();
             Dealer dealer = new Dealer();
-            Player player = new Player();
+            List<Player> players = new List<Player>();
 
 
-            Debug.WriteLine("Start van programma");
+            int amount = 0;
+            while (amount < 1 || amount > 4) // spelers aantal check moet tussen 1 en 4
+            {
+                Console.WriteLine("Choose amount of players 1 / 4: ");
+                amount = Convert.ToInt32(Console.ReadLine());
 
-            dealer.dealCards(deck, player);
+                if (amount < 1 || amount > 4)
+                {
+                    Console.WriteLine("Invalid input. Please choose a number between 1 and 4.");
+                }
+            }
 
+            for (int i = 0; i < amount; i++) // Aantal spelers wordt toegevoegd aan de players List.
+            {
+                Player player = new Player();
+                player.Name = $"Player {i + 1}";
+                players.Add(player);
+            }
+
+            Debug.WriteLine("Press ENTER to shuffle the deck and start dealing...");
+            Console.ReadLine();
+            deck.shuffleCards();
+
+            dealer.dealCards(deck, players);
 
             foreach (Card card in dealer.DealerHand)
             {
-                Debug.WriteLine("Dealer Card: " + card);
+                Debug.WriteLine("Dealer Cards: " + card);
+            }
+
+            foreach (Player speler in players)
+            {
+                foreach (Card kaart in speler.PlayerHand)
+                {
+                    Debug.WriteLine($"{speler.Name} kaart: {kaart}");
+                }
             }
         }
     }
